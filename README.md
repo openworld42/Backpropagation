@@ -1,2 +1,2 @@
 # Backpropagation
-Neural backpropagation with examples and training
+Neural backpropagation (Java) with examples and training
