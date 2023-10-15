@@ -1,4 +1,4 @@
-[Linktext](URL)# Backpropagation
+# Backpropagation
 Neural backpropagation (Java) with examples and training
 
 You can find java test/example programms in the 
