@@ -41,11 +41,13 @@ public class TesterSimpleNumbers {
 		// train the network
 		double[] input = {0.1, 0.4};
 		double[] desiredOutput = {0.7};
-		for (int trainingStep = 0; trainingStep < 200; trainingStep++) {
+		int trainigSteps = 200;
+		for (int trainingStep = 0; trainingStep < trainigSteps; trainingStep++) {
 			neuralNetwork.train(input, desiredOutput);
 		}
 		// display the result of the training
 		double[] output = neuralNetwork.forwardPass(input);
+		System.out.println("\nTraining with " + trainigSteps + " steps for: " + Arrays.toString(desiredOutput) + " ->\n");
 		System.out.println("Input: " + Arrays.toString(input));
 		System.out.println("Output: " + Arrays.toString(output));
 	}
