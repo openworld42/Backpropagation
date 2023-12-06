@@ -8,6 +8,8 @@ You can find java test/example programs in the
 **TesterSimpleNumbers.java** is the most simple example, training a one-hidden-layer backpropagation 
 network to approximate a result (number) from to input numbers.
 
+**TesterXOR.java** is a classic problem in artificial neural network research that highlights the major differences between a single-layer perceptron and one that has a few more layers. The XOR function is not linearly separable, meaning that a single-layer perceptron cannot converge on it. However, a perceptron with one hidden layer can accurately classify the XOR inputs. 
+
 ### How to use it:
 Download the newest Github release **backpropagation_vx.x.x.jar** file . Write your own neuronal network application or start
 with one of the [test program examples][tester_url], referencing the jar like
