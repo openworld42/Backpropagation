@@ -14,7 +14,7 @@
 	<!-- set the global properties for this build -->
 	
 	<property name="appdesc" value="Backpropagation"/>
-	<property name="repo" value="Backpropagation"/>
+	<property name="repo" value="https://github.com/openworld42/Backpropagation"/>
 	<property name="jarprefix" value="backpropagation"/>
 	
 	<property name="src" location="src"/>
