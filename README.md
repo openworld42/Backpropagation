@@ -34,6 +34,5 @@ Contributions, examples (or a request :slightly_smiling_face:) from any interest
 
 <!-- Repository -->
 
-[javadoc_url]: https://raw.githack.com/openworld42/Backpropagation/master/blob/javadoc/index.html
-
+[javadoc_url]: https://raw.githack.com/openworld42/Backpropagation/master/javadoc/index.html
 [tester_url]: https://github.com/openworld42/Backpropagation/tree/master/src/test
