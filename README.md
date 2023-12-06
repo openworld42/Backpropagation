@@ -3,14 +3,14 @@
 **Neural backpropagation (Java) with examples and training.**
 
 You can find java test/example programs in the 
-[test directory](https://github.com/openworld42/Backpropagation/tree/main/src/test) on Github.
+[test directory][tester_url] on Github.
 
 **TesterSimpleNumbers.java** is the most simple example, training a one-hidden-layer backpropagation 
 network to approximate a result (number) from to input numbers.
 
 ### How to use it:
 Download the newest Github release **backpropagation_vx.x.x.jar** file . Write your own neuronal network application or start
-with one of the [test program examples](https://github.com/openworld42/Backpropagation/tree/master/src/test), referencing the jar like
+with one of the [test program examples][tester_url], referencing the jar like
 
 **java -cp backpropagation_vx.x.x.jar**
 
@@ -35,3 +35,4 @@ Contributions, examples (or a request :slightly_smiling_face:) from any interest
 <!-- Repository -->
 
 [javadoc_url]: https://htmlpreview.github.io/?https://raw.githubusercontent.com/openworld42/Backpropagation/master/javadoc/index.html
+[tester_url]: https://github.com/openworld42/Backpropagation/tree/master/src/test
