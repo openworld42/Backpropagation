@@ -17,14 +17,19 @@
 package backpropagation;
 
 /**
- * Fast table lookup implementation for the sigmoid function, speeding up computation time.
+ * Fast table lookup implementation for the Sigmoid function, speeding up computation time.
  */
 public class Sigmoid {
 
+	/** the table size for fast table lookup */
     private static final int TABLE_SIZE = 10000;
+	/** the minimum value of the table */
     private static final double TABLE_MIN = -6.0;
+	/** the maximum value of the table */
     private static final double TABLE_MAX = 6.0;
+	/** the table for fast table lookup */
     private static final double[] SIGMOID_TABLE = new double[TABLE_SIZE];
+	/** the value of a step within the table */
     private static final double TABLE_STEP = (TABLE_MAX - TABLE_MIN) / (TABLE_SIZE - 1);
 
     static {

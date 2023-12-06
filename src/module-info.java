@@ -1,5 +1,5 @@
 /**
- * A generalized model of a Backpropagation Neural Network to be trained and then used.<br/><br/>
+ * A generalized model of a Backpropagation Neural Network to be trained and used afterwards.<br/><br/>
  * 
  * References, algorithms and literature: <br/><br/>
  * 
