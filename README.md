@@ -26,7 +26,7 @@ You may also build it from scratch using **Ant** and the **build.xml** file.<br/
 
 **References, algorithms and literature (see also [Javadoc](https://github.com/openworld42/QemuJuicy/blob/main/javadoc/index.html) for more hints):** 
 
- * David Kriesel, 2007, A Brief Introduction to Neural Networks, [www.dkriesel.com](www.dkriesel.com/en/science/neural_networks)
+ * David Kriesel, 2007, A Brief Introduction to Neural Networks, [www.dkriesel.com](https://www.dkriesel.com/en/science/neural_networks)
  * R. Rojas, Neural Networks, Springer-Verlag, Berlin
 
 Contributions, examples (or a request :slightly_smiling_face:) from any interested party are welcome - please open an issue with a short description.
