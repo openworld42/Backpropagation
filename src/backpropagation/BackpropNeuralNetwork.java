@@ -33,7 +33,7 @@ import java.util.*;
  * 			it "stores" just the input as weights and increases
  * 			the amount of computation (time, energy), therefore an
  * 			unknown new data to the model will not be recognized
- * 			(the model does not "realize" the principle
+ * 			(the model does not "realize" the principle)
  * 		* not enough neurons: the model is to small to learn "all data"
  * 		* sometimes it makes sense to start with a higher 
  * 			learning rate and reduce it after a while of training
@@ -54,33 +54,54 @@ import java.util.*;
  */
 public class BackpropNeuralNetwork {
 	
+	/** the version of <code>BackpropNeuralNetwork</code> */
 	public static final String VERSION = "1.0.1";
-
+	/** the default learning rate */
 	public static final float DEFAULT_LEARNING_RATE = 0.05f;
 
+	/** the number of inputs */
     private int inputNodeCount;
+	/** the number of hidden nodes */
     private int hiddenNodeCount;
+	/** the number of outputs */
     private int outputNodeCount;
+	/** the weights between input and hidden nodes */
     private double[][] weightsIH;
+	/** the weights hidden input and output nodes */
     private double[][] weightsHO;
-    private double[] hiddenOutputs;
+	/** the outputs of the hidden nodes */
+    private double[] hiddenNodeOutputs;
+	/** the output nodes */
     private double[] outputs;
+	/** the bias of the hidden nodes */
     private double[] biasH;
+	/** the bias of the output nodes */
     private double[] biasO;
+	/** the errors of the outputs in a training step, used for backpropagation */
     private double[] outputErrors;
+	/** the errors of the hidden nodes in a training step, used for backpropagation */
 	private double[] hiddenErrors;
-	private double[][] inputTrainVectors;					// training data inputs: N data sets with M inputs each
-	private double[][] outputTrainVectors;					// training data expected outputs: N data sets with M outputs each
+	/** training data inputs: N data sets with M inputs each */
+	private double[][] inputTrainVectors;
+	/** training data expected outputs: N data sets with M outputs each */
+	private double[][] outputTrainVectors;
+	/** the learning rate */
     private double learningRate;
+	/** a <code>Random</code> for "symmetry breaking" */
     private Random random;
+	/** the error of the last training */
     private double error;
 
 	/**
 	 * Constructs an empty default model, a setup may be needed afterwards.
 	 * This default model has one hidden layer with about 10% neurons than the input layer,
 	 * the default learning rate and weights/biases initialized using random numbers<br>
-	 * in the ranges [0.1 .. 0.5].  
-	 */
+	 * in the ranges [0.1 .. 0.5]. 
+	 *  
+     * @param inputNodeCount		the number of inputs
+     * @param hiddenNodeCount		the number of hidden nodes
+     * @param outputNodeCount		the number of outputs
+     */
     public BackpropNeuralNetwork(int inputNodeCount, int hiddenNodeCount, int outputNodeCount) {
     	
     	this(inputNodeCount, hiddenNodeCount, outputNodeCount, DEFAULT_LEARNING_RATE, null);
@@ -90,7 +111,13 @@ public class BackpropNeuralNetwork {
 	 * Constructs an empty default model, a setup may be needed afterwards.
 	 * This default model has one hidden layer and weights/biases initialized using random numbers<br>
 	 * in the ranges [0.1 .. 0.5].  
-	 */
+	 * 
+     * @param inputNodeCount		the number of inputs
+     * @param hiddenNodeCount		the number of hidden nodes
+     * @param outputNodeCount		the number of outputs
+     * @param learningRate			the learning rate, usually in the range of 0.01 to 0.9
+     * @param random				a <code>Random</code>, may be <code>null</code> for a default <code>Random</code>
+     */
     public BackpropNeuralNetwork(int inputNodeCount, int hiddenNodeCount, int outputNodeCount, 
     		double learningRate, Random random) {
     	
@@ -105,7 +132,7 @@ public class BackpropNeuralNetwork {
         // allocate memory for all variables
         weightsIH = new double[inputNodeCount][hiddenNodeCount];
         weightsHO = new double[hiddenNodeCount][outputNodeCount];
-        hiddenOutputs = new double[hiddenNodeCount];
+        hiddenNodeOutputs = new double[hiddenNodeCount];
         outputs = new double[outputNodeCount];
         biasH = new double[hiddenNodeCount];
         biasO = new double[outputNodeCount];
@@ -134,7 +161,7 @@ public class BackpropNeuralNetwork {
 	 * @param trainingData		the training data: input vector 0, desired output vector 0, 
 	 * 							input vector 1, desired output vector 1, and so on
 	 */
-	public void createInOutVectors(int trainingData[][]) {
+	public void createInOutVectors(double trainingData[][]) {
 		
 		int inputLength = trainingData[0].length;
 		int outputLength = trainingData[1].length;
@@ -142,12 +169,12 @@ public class BackpropNeuralNetwork {
 		inputTrainVectors = new double[dataSetCount][inputLength];
 		outputTrainVectors = new double[dataSetCount][outputLength];
 		for (int i = 0; i < dataSetCount; i++) {
-			int[] inputVec = trainingData[i * 2];
+			double[] inputVec = trainingData[i * 2];
 			double[] vector = inputTrainVectors[i];
 			for (int j = 0; j < inputVec.length; j++) {
 				vector[j] = inputVec[j];
 			}
-			int[] outputVec = trainingData[i * 2 + 1];
+			double[] outputVec = trainingData[i * 2 + 1];
 			vector = outputTrainVectors[i];
 			for (int j = 0; j < outputVec.length; j++) {
 				vector[j] = outputVec[j];
@@ -156,7 +183,7 @@ public class BackpropNeuralNetwork {
 	}
 
     /**
-     * Compute the ouputs (output vector) for an input vector.
+     * Compute the outputs (output vector) for an input vector.
      * Usually the neural network has been trained before.
      * 
      * @param inputs		the inputs (input vector)
@@ -171,13 +198,13 @@ public class BackpropNeuralNetwork {
                 activation += inputs[j] * weightsIH[j][i];
             }
             activation += biasH[i];
-            hiddenOutputs[i] = Sigmoid.sigmoid(activation);
+            hiddenNodeOutputs[i] = Sigmoid.sigmoid(activation);
         }
         // calculate the output of the output layer
         for (int i = 0; i < outputNodeCount; i++) {
             double activation = 0;
             for (int j = 0; j < hiddenNodeCount; j++) {
-                activation += hiddenOutputs[j] * weightsHO[j][i];
+                activation += hiddenNodeOutputs[j] * weightsHO[j][i];
             }
             activation += biasO[i];
             outputs[i] = Sigmoid.sigmoid(activation);
@@ -185,16 +212,25 @@ public class BackpropNeuralNetwork {
         return outputs;
     }
 
+	/**
+	 * @return the error of the last training 
+	 */
 	public double getError() {
 		
 		return error;
 	}
 	
+	/**
+	 * @return the errors of the hidden nodes of the last training 
+	 */
 	public double[] getHiddenErrors() {
 		
 		return hiddenErrors;
 	}
 
+	/**
+	 * @return the errors of the output nodes of the last training 
+	 */
     public double[] getOutputErrors() {
     	
 		return outputErrors;
@@ -208,7 +244,10 @@ public class BackpropNeuralNetwork {
 		return learningRate;
 	}
 
-    private double nextRandom() {
+    /**
+     * @return the next random number to initialize weights and biases
+     */
+    protected double nextRandom() {
     	
 		return random.nextDouble(0.1, 0.5);
     }
@@ -248,7 +287,7 @@ public class BackpropNeuralNetwork {
                 error += outputErrors[j] * weightsHO[i][j];
             }
         	// sigmoid derivative:  hiddenOutputs[i] * (1 - hiddenOutputs[i])
-            hiddenErrors[i] = error * hiddenOutputs[i] * (1 - hiddenOutputs[i]);
+            hiddenErrors[i] = error * hiddenNodeOutputs[i] * (1 - hiddenNodeOutputs[i]);
         }
         // update weights and biases: input nodes to hidden nodes and hidden to output nodes
         for (int i = 0; i < inputNodeCount; i++) {
@@ -258,7 +297,7 @@ public class BackpropNeuralNetwork {
         }
         for (int i = 0; i < hiddenNodeCount; i++) {
             for (int j = 0; j < outputNodeCount; j++) {
-                weightsHO[i][j] += learningRate * outputErrors[j] * hiddenOutputs[i];
+                weightsHO[i][j] += learningRate * outputErrors[j] * hiddenNodeOutputs[i];
             }
             biasH[i] += learningRate * hiddenErrors[i];
         }
@@ -270,9 +309,9 @@ public class BackpropNeuralNetwork {
 	/**
 	 * Train the model with a number data set, using one or more steps in the direction of the given data set.
 	 * 
-     * @param inputs				the input vector to train
-     * @param desiredOutputs		the desired output vector
-	 * @param trainigStepsPerSet	the number of steps to go for this input/output
+     * @param inputVector				the input vector to train
+     * @param desiredOutputVector		the desired output vector
+	 * @param trainigSteps				the number of steps to train the model with this input/output
 	 */
 	public void trainDataSet(double[] inputVector, double[] desiredOutputVector, int trainigSteps) {
 		
@@ -303,7 +342,7 @@ public class BackpropNeuralNetwork {
 	 * Callers can change the learning rate or use other training data sets 
 	 * by calling createInOutVectors() before.
 	 * 
-	 * @param random				a random number generator to change the order of training
+	 * @param random				a random number generator to change the order of training or null for a default
 	 * @param trainings				the number of data sets to be trained, usually much more than the number of 
 	 * 								data sets - they will be repeated depending on the probability of Random		
 	 * @param trainigStepsPerSet	the number of training steps per set: if greater than one, the model will step
@@ -311,6 +350,7 @@ public class BackpropNeuralNetwork {
 	 */
 	public void trainRandom(Random random, int trainings, int trainigStepsPerSet) {
 		
+		random = random == null ? new Random() : random;
 		for (int i = 0; i < trainings; i++) {
 			int dataSetIndex = random.nextInt(inputTrainVectors.length);
 			double[] inputVector = inputTrainVectors[dataSetIndex];
