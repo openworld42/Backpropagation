@@ -1,0 +1,106 @@
+<project name="Backpropagation" default="dist" basedir=".">
+	<description>
+	  
+	Ant build file for the Backpropagation project
+	
+	To build: 
+		ant						start in directory where the file build.xml is located
+		ant clean				cleanup the build fileset
+		
+	results are in the dist and build directories
+		
+	</description>
+	
+	<!-- set the global properties for this build -->
+	
+	<property name="appdesc" value="Backpropagation"/>
+	<property name="repo" value="Backpropagation"/>
+	<property name="jarprefix" value="backpropagation"/>
+	
+	<property name="src" location="src"/>
+	<property name="dir.src" value="src"/>
+	<property name="build" location="build"/>
+	<property name="dist" location="dist"/>
+	<property name="base" location="."/>
+	<property name="javadoc" location="javadoc"/>
+	<property name="dir.javadoc" value="javadoc"/>
+  
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<echo>
+			appdesc: ${appdesc}
+			repo: ${repo}
+			jarprefix: ${jarprefix} + "_vN.N.N.jar"
+		</echo>
+		<input message="Please enter the version (as of Version.java, like v1.2.3): "
+			addproperty="version"/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+	</target>
+
+	<target name="compile" depends="init"
+		description="compile the source">
+		<!-- Compile the Java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
+		<delete file="${build}/Main.class"/>
+	</target>
+
+	<target name="javadoc" depends="compile" description="generate javadoc">
+		<delete dir="${javadoc}" />
+		<mkdir dir="${javadoc}" />
+		<javadoc destdir="${javadoc}" access="private" author="true" classpath="." nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" 
+				sourcepath="${src}" splitindex="true" use="true" version="true">
+			<doctitle><![CDATA[${appdesc}]]></doctitle>
+			<bottom>
+				<![CDATA[Copyright © 2023. All Rights Reserved. Read the license file(s) enclosed. ]]>
+			</bottom>
+			<link href="https://docs.oracle.com/en/java/javase/17/docs/api/"/>
+		</javadoc>
+	</target>
+
+	<target name="dist" depends="compile,javadoc"
+		description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}"/>
+
+		<!-- Put everything in ${build} into the Project-${DSTAMP}.jar file -->
+ 		<jar jarfile="${dist}/${jarprefix}_${version}.jar" basedir="${build}">
+			<fileset file="${base}/README*"/>
+			<fileset file="${base}/LICENSE*"/>
+			<fileset file="${base}/CHANGELOG.md"/>
+			<fileset file="${base}/build.xml"/>
+			<fileset dir="." includes="${dir.src}/**"/>
+			<fileset dir="." includes="${dir.javadoc}/**"/>
+			<manifest>
+				<!--
+				<attribute name="Main-Class" value="${mainclass}"/>
+				-->
+				<attribute name="Implementation-Version"  value="${version}"/>   
+      			<attribute name="Built-Date" value="${DSTAMP}"/>        
+				<attribute name="Implementation-URL" value="${repo}"/>
+
+				<!--
+				<section name="${appname}">
+					<attribute name="Version" value="${version}"/>
+					<attribute name="Build date" value="${DSTAMP}"/>
+					<attribute name="Repository" value="${repo}"/>
+				</section>
+				 -->
+			</manifest>
+		</jar>
+
+		<copy file="${dist}/${jarprefix}_${version}.jar" tofile="${base}/${jarprefix}_${version}.jar"/>
+		<echo>
+			check the file ${base}/${jarprefix}_${version}.jar
+			then run: ant clean
+		</echo>
+	</target>
+	
+	<target name="clean"
+		description="clean up">
+	    <!-- Delete the ${build} and ${dist} directory trees -->
+	<delete dir="${build}"/>
+	<delete dir="${dist}"/>
+	</target>
+</project>
