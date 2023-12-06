@@ -5,9 +5,9 @@
  * 
  * &nbsp; &nbsp; &nbsp; R. Rojas, Neural Networks, Springer-Verlag, Berlin<br/>
  * &nbsp; &nbsp; &nbsp; David Kriesel, 2007, A Brief Introduction to Neural Networks, 
- *    <a href="www.dkriesel.com/en/science/neural_networks">www.dkriesel.com</a> 
- * 
- * </pre>
+ *    <a href="www.dkriesel.com/en/science/neural_networks">www.dkriesel.com</a><br/>
+ *    
+ * @see "BackpropNeuralNetwork or one of the test programs for further information"
  */
 module Backpropagation {
 }
