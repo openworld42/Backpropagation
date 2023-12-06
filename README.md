@@ -12,7 +12,7 @@ network to approximate a result (number) from to input numbers.
 Download the newest Github release **backpropagation_vx.x.x.jar** file . Write your own neuronal network application or start
 with one of the [test program examples][tester_url], referencing the jar like
 
-**java -cp backpropagation_vx.x.x.jar**
+**java -cp backpropagation_vx.x.x.jar test/TesterSimpleNumbers**
 
 where **x.x.x** is the current version. You need a Java runtime/JDK installed (at least version 17 - check on command line using **java -version**).<br/>
 To get it: **Linux**: simply use your package manager, **Windows/macOS/others**: download and install JDK from [here](https://openjdk.java.net/).<br/> 
@@ -30,7 +30,6 @@ You may also build it from scratch using **Ant** and the **build.xml** file.<br/
  * R. Rojas, Neural Networks, Springer-Verlag, Berlin
 
 Contributions, examples (or a request :slightly_smiling_face:) from any interested party are welcome - please open an issue with a short description.
-
 
 <!-- Repository -->
 
