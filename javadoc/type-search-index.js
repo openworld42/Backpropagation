@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"backpropagation","l":"BackpropNeuralNetwork"},{"p":"backpropagation","l":"Sigmoid"},{"p":"test","l":"TesterSimpleNumbers"},{"p":"test","l":"TesterXOR"}];updateSearchResults();
