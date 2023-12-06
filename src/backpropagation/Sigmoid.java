@@ -37,7 +37,7 @@ public class Sigmoid {
     /**
      * Returns the sigmoid function result using a table lookup.
      * 
-     * @param x
+     * @param x		the <code>x</code> of <code>sigmoid(x)</code>sigmoid(x)
      * @return the sigmoid function result
      */
     public static double sigmoid(double x) {

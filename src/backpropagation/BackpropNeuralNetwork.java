@@ -51,8 +51,6 @@ import java.util.*;
  * 		David Kriesel, 2007, A Brief Introduction to Neural Networks, www.dkriesel.com/en/science/neural_networks 
  * 
  * </pre>
- * 
- * @author joe
  */
 public class BackpropNeuralNetwork {
 	

@@ -27,7 +27,9 @@ import backpropagation.*;
 public class TesterSimpleNumbers {
 	
 	/**
-	 * @param args
+	 * Runs <code>TesterSimpleNumbers</code>.
+	 * 
+	 * @param args		the arguments
 	 */
 	public static void main(String[] args) {
 
