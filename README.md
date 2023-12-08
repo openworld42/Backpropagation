@@ -2,10 +2,11 @@
 alt="Backpropagation" align="right" style="right:40px; top:18px; width:128px; border:none;" />
 
 <br />
+<br />
 
 # Backpropagation
 
-<h3>Neural backpropagation (Java) with examples and training.<h3>
+<h3>Neural backpropagation (Java) with examples and training.</h3>
 
 [![Maintenance Status](https://badgen.net/badge/maintenance/active/green)](https://github.com/openworld42/JavaUtil#maintenance-status)
 ![dependencies](https://img.shields.io/badge/dependencies-none-orange)
@@ -68,7 +69,7 @@ to avoid some initialization traps (the model uses "symmetry breaking").<br />
 
 **Apache 2.0 licensed**, therefore may be used in any other project/program. 
 
-**Credits, Kudos and Attribution:** 
+:medal_sports: &nbsp; **Credits, Kudos and Attribution:** 
  * David Kriesel
  * Raúl Rojas
  * Logo: link to [commons.wikimedia.org](https://commons.wikimedia.org/wiki/File:Oxygen480-actions-office-chart-polar-stacked.svg), [The Oxygen Team](https://github.com/KDE/oxygen-icons5/blob/master/AUTHORS) (License: LGPL) 
